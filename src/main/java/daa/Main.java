@@ -19,18 +19,36 @@ public class Main {
 
             System.out.println("-----------------------------");
 
-            //PRIM START
-            PrimMST prim = new PrimMST();
-            MSTResult primResult = prim.runPrim(g);
+            //PRIM
+            MSTResult primResult = PrimMST.runPrim(g);
 
-            System.out.println("Prim MST total cost = " + primResult.totalCost);
-            System.out.println("Prim edges:");
+            System.out.println("[Prim]");
+            System.out.println("  MST total cost = " + primResult.totalCost);
+            System.out.println("  MST edges:");
             for (Edge mstEdge : primResult.mstEdges) {
-                System.out.println("  " + mstEdge);
+                System.out.println("    " + mstEdge);
             }
-            System.out.println("Prim operations = " + primResult.operationsCount);
-            System.out.println("Prim time (ms) = " + primResult.executionTimeMs);
+            System.out.println("  operations = " + primResult.operationsCount);
+            System.out.println("  time (ms)  = " + primResult.executionTimeMs);
 
+            //KRUSKAL
+            MSTResult kruskalResult = KruskalMST.runKruskal(g);
+
+            System.out.println("[Kruskal]");
+            System.out.println("  MST total cost = " + kruskalResult.totalCost);
+            System.out.println("  MST edges:");
+            for (Edge mstEdge : kruskalResult.mstEdges) {
+                System.out.println("    " + mstEdge);
+            }
+            System.out.println("  operations = " + kruskalResult.operationsCount);
+            System.out.println("  time (ms)  = " + kruskalResult.executionTimeMs);
+
+            //VALIDATION
+            if (primResult.totalCost == kruskalResult.totalCost) {
+                System.out.println("Both algorithms produced the same MST cost.");
+            } else {
+                System.out.println(" Mismatch in MST cost!");
+            }
 
             System.out.println("====================================");
             idx++;
