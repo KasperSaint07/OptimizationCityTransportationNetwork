@@ -16,7 +16,23 @@ public class Main {
             for (Edge e : g.edges) {
                 System.out.println("  " + e);
             }
+
             System.out.println("-----------------------------");
+
+            //PRIM START
+            PrimMST prim = new PrimMST();
+            MSTResult primResult = prim.runPrim(g);
+
+            System.out.println("Prim MST total cost = " + primResult.totalCost);
+            System.out.println("Prim edges:");
+            for (Edge mstEdge : primResult.mstEdges) {
+                System.out.println("  " + mstEdge);
+            }
+            System.out.println("Prim operations = " + primResult.operationsCount);
+            System.out.println("Prim time (ms) = " + primResult.executionTimeMs);
+
+
+            System.out.println("====================================");
             idx++;
         }
     }
